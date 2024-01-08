@@ -47,7 +47,7 @@ public class CheckoutPipelineTest {
         Mockito.when(pricingService.getPrice("ABC")).thenReturn(10.0);
         Mockito.when(pricingService.getPrice("XYZ")).thenReturn(15.0);
         Mockito.when(pricingService.getPrice("AAA")).thenReturn(20.0);
-        Mockito.when(pricingService.getPrice("BBB")).thenReturn(30.0);
+        Mockito.when(pricingService.getPrice("BBB")).thenReturn(10.0);
 
         List<String> productCodes = Arrays.asList("ABC", "XYZ");
         List<String> productCodes2 = Arrays.asList("AAA");
@@ -81,7 +81,7 @@ public class CheckoutPipelineTest {
         PaymentSummary paymentSummary = checkoutPipeline.checkout(basket);
 
         // Verify the result
-        assertEquals(62.0, paymentSummary.getRetailTotal()); // Expected total after applying promotions
+        assertEquals(54.0, paymentSummary.getRetailTotal()); // Expected total after applying promotions
     }
 
 }
