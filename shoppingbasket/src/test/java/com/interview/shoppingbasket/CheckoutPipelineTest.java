@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class CheckoutPipelineTest {
     @BeforeEach
     void setup() {
         checkoutPipeline = new CheckoutPipeline();
-        
+
     }
 
     @Test
@@ -47,24 +46,30 @@ public class CheckoutPipelineTest {
 
         Mockito.when(pricingService.getPrice("ABC")).thenReturn(10.0);
         Mockito.when(pricingService.getPrice("XYZ")).thenReturn(15.0);
+        Mockito.when(pricingService.getPrice("AAA")).thenReturn(20.0);
+        Mockito.when(pricingService.getPrice("BBB")).thenReturn(10.0);
 
         List<String> productCodes = Arrays.asList("ABC", "XYZ");
+        List<String> productCodes2 = Arrays.asList("AAA");
+        List<String> productCodes3 = Arrays.asList("BBB");
         List<Promotion> promotions = Arrays.asList(
                 new Promotion(productCodes, "2FOR1"),
-                new Promotion(Arrays.asList("ABC"), "50%"),
-                new Promotion(Arrays.asList("XYZ"), "10%")
+                new Promotion(productCodes2, "50"),
+                new Promotion(productCodes3, "10")
         );
 
         Mockito.when(promotionsService.getPromotions(Mockito.any(Basket.class))).thenReturn(promotions);
 
-        // Create basket items
         BasketItem item1 = new BasketItem("ABC", "Product ABC", 2, 0.0);
         BasketItem item2 = new BasketItem("XYZ", "Product XYZ", 1, 0.0);
+        BasketItem item3 = new BasketItem("AAA", "Product AAA", 1, 0.0);
+        BasketItem item4 = new BasketItem("BBB", "Product BBB", 1, 0.0);
 
-        // Create basket
         Basket basket = new Basket();
         basket.add(item1.getProductCode(), item1.getProductName(), item1.getQuantity());
         basket.add(item2.getProductCode(), item2.getProductName(), item2.getQuantity());
+        basket.add(item2.getProductCode(), item3.getProductName(), item3.getQuantity());
+        basket.add(item2.getProductCode(), item4.getProductName(), item4.getQuantity());
 
         // Create checkout pipeline
         CheckoutPipeline checkoutPipeline = new CheckoutPipeline();
@@ -76,7 +81,7 @@ public class CheckoutPipelineTest {
         PaymentSummary paymentSummary = checkoutPipeline.checkout(basket);
 
         // Verify the result
-        assertEquals(25.0, paymentSummary.getRetailTotal()); // Expected total after applying promotions
+        assertEquals(40.0, paymentSummary.getRetailTotal()); // Expected total after applying promotions
     }
 
 }
