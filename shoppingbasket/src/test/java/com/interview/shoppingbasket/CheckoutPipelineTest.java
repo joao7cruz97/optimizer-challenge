@@ -27,31 +27,7 @@ public class CheckoutPipelineTest {
     @BeforeEach
     void setup() {
         checkoutPipeline = new CheckoutPipeline();
-        PricingService pricingService = Mockito.mock(PricingService.class);
-        PromotionsService promotionsService = Mockito.mock(PromotionsService.class);
-
-        Basket basket = new Basket();
-        basket.add("productCode", "myProduct", 10);
-        basket.add("productCode", "myProduct", 10);
-        basket.add("productCode2", "myProduct2", 10);
-        basket.add("productCode3", "myProduct3", 10);
-
-        List<String> list = new ArrayList<>();
-        List<String> list2 = new ArrayList<>();
-        List<String> list3 = new ArrayList<>();
-        // Adicionar elementos à lista
-        list.add("1");
-        list.add("2");
-        list2.add("3");
-        list3.add("4");
-
-        Promotion promo = new Promotion(list,"2FOR1");
-        Promotion promo2 = new Promotion(list2,"50%");
-        Promotion promo3 = new Promotion(list3,"10%");
-
-
-        RetailPriceCheckoutStep checkoutStep = new RetailPriceCheckoutStep(pricingService);
-        ApplyPromotionsStep promotionStep = new ApplyPromotionsStep(promotionsService);
+        
     }
 
     @Test
