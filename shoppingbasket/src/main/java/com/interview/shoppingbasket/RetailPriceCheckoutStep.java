@@ -42,12 +42,12 @@ public class RetailPriceCheckoutStep implements CheckoutStep {
             case "2FOR1":
                 int free = basketItem.getQuantity() / 2;
                 return ((basketItem.getQuantity() - free) * price);
-            case "50%":
-                double discount = price * 0.5;
-                return price - discount;
-            case "10%":
-                double discount2 = price * 0.1;
-                return price - discount2;
+            case "50":
+                double totalPrice = (basketItem.getQuantity()) * price * 0.5;
+                return totalPrice;
+            case "10":
+                double discount = (basketItem.getQuantity()) *  price * 0.1;
+                return (price * basketItem.getQuantity()) - discount;
             default:
                 return price;
         }
