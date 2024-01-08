@@ -1,0 +1,12 @@
+com\interview\shoppingbasket\CheckoutPipeline.class
+com\interview\shoppingbasket\CheckoutStep.class
+com\interview\shoppingbasket\PricingService.class
+com\interview\shoppingbasket\Basket.class
+com\interview\shoppingbasket\CheckoutContext.class
+com\interview\shoppingbasket\PromotionsService.class
+com\interview\shoppingbasket\Promotion.class
+com\interview\shoppingbasket\BasketItem.class
+com\interview\shoppingbasket\BasketConsolidationCheckoutStep.class
+com\interview\shoppingbasket\PaymentSummary.class
+com\interview\shoppingbasket\ShoppingbasketApplication.class
+com\interview\shoppingbasket\RetailPriceCheckoutStep.class
